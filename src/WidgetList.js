@@ -1,12 +1,19 @@
 import React from 'react';
 import AppContext from './AppContext';
 
+function getPropsFromContext(context) {
+  return {
+    widgets: context.widgets,
+  };
+}
+
 function WidgetListWithAppContext(props) {
   return (
     <AppContext.Consumer>
       {
         function (context) {
-          return <WidgetList widgets={context.widgets} {...props} />;
+          const propsFromContext = getPropsFromContext(context);
+          return <WidgetList {...propsFromContext} {...props} />;
         }
       }
     </AppContext.Consumer>
