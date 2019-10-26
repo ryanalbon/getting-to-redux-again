@@ -1,8 +1,28 @@
 import React from 'react';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      widgets: [
+        'Alice',
+        'Bob',
+      ],
+    };
+  }
+
   render() {
-    return 'Hello, world.';
+    return (
+      <div>
+        {
+          this.state.widgets.map(
+            function (widget, i) {
+              return <div key={i}>{widget}</div>;
+            }
+          )
+        }
+      </div>
+    );
   }
 }
 
