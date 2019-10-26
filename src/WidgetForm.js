@@ -32,19 +32,21 @@ class WidgetForm extends React.Component {
   }
 }
 
-const Component = WidgetForm;
-
-function WidgetFormWithAppContext(props) {
-  return (
-    <AppContext.Consumer>
-      {
-        function (context) {
-          const propsFromContext = getPropsFromContext(context);
-          return <Component {...propsFromContext} {...props} />;
+function WithAppContext(getPropsFromContext, Component) {
+  return function (props) {
+    return (
+      <AppContext.Consumer>
+        {
+          function (context) {
+            const propsFromContext = getPropsFromContext(context);
+            return <Component {...propsFromContext} {...props} />;
+          }
         }
-      }
-    </AppContext.Consumer>
-  );
+      </AppContext.Consumer>
+    );
+  };
 }
+
+const WidgetFormWithAppContext = WithAppContext(getPropsFromContext, WidgetForm);
 
 export default WidgetFormWithAppContext;
