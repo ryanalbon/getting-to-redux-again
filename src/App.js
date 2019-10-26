@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <AppContext.Provider value={this.state}>
         <WidgetForm onSubmit={(widget) => this.addWidget(widget)}/>
-        <WidgetList widgets={this.state.widgets} />
+        <WidgetList />
       </AppContext.Provider>
     );
   }

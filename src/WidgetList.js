@@ -1,4 +1,17 @@
 import React from 'react';
+import AppContext from './AppContext';
+
+function WidgetListWithAppContext(props) {
+  return (
+    <AppContext.Consumer>
+      {
+        function (context) {
+          return <WidgetList widgets={context.widgets} {...props} />;
+        }
+      }
+    </AppContext.Consumer>
+  );
+}
 
 function WidgetList(props) {
   return (
@@ -14,4 +27,4 @@ function WidgetList(props) {
   );
 }
 
-export default WidgetList;
+export default WidgetListWithAppContext;
