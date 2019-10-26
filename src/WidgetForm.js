@@ -1,12 +1,19 @@
 import React from 'react';
 import AppContext from './AppContext';
 
+function getPropsFromContext(context) {
+  return {
+    onSubmit: context.addWidget,
+  };
+}
+
 function WidgetFormWithAppContext(props) {
   return (
     <AppContext.Consumer>
       {
         function (context) {
-          return <WidgetForm onSubmit={context.addWidget} {...props} />;
+          const propsFromContext = getPropsFromContext(context);
+          return <WidgetForm {...propsFromContext} {...props} />;
         }
       }
     </AppContext.Consumer>
