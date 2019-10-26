@@ -11,27 +11,27 @@ class App extends React.Component {
         'Alice',
         'Bob',
       ],
+      addWidget: (widget) => {
+        this.setState(
+          function (currentState) {
+            return {
+              widgets: [ ...currentState.widgets, widget ],
+            };
+          }
+        );
+      },
     };
   }
 
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <WidgetForm onSubmit={(widget) => this.addWidget(widget)}/>
+        <WidgetForm onSubmit={(widget) => this.state.addWidget(widget)}/>
         <WidgetList />
       </AppContext.Provider>
     );
   }
 
-  addWidget(widget) {
-    this.setState(
-      function (currentState) {
-        return {
-          widgets: [ ...currentState.widgets, widget ],
-        };
-      }
-    );
-  }
 }
 
 export default App;
