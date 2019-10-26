@@ -1,5 +1,5 @@
 import React from 'react';
-import AppContext from './AppContext';
+import AppContext, { WithAppContext } from './AppContext';
 
 function getPropsFromContext(context) {
   return {
@@ -30,21 +30,6 @@ class WidgetForm extends React.Component {
     this.props.onSubmit(widget);
     this.setState({ widget: '' });
   }
-}
-
-function WithAppContext(getPropsFromContext, Component) {
-  return function (props) {
-    return (
-      <AppContext.Consumer>
-        {
-          function (context) {
-            const propsFromContext = getPropsFromContext(context);
-            return <Component {...propsFromContext} {...props} />;
-          }
-        }
-      </AppContext.Consumer>
-    );
-  };
 }
 
 const WidgetFormWithAppContext = WithAppContext(getPropsFromContext, WidgetForm);
