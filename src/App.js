@@ -1,7 +1,9 @@
 import React from 'react';
 
-function App() {
-  return 'Hello, world.';
+class App extends React.Component {
+  render() {
+    return 'Hello, world.';
+  }
 }
 
 export default App;
