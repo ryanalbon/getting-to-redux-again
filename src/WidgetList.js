@@ -7,13 +7,15 @@ function getPropsFromContext(context) {
   };
 }
 
+const Component = WidgetList;
+
 function WidgetListWithAppContext(props) {
   return (
     <AppContext.Consumer>
       {
         function (context) {
           const propsFromContext = getPropsFromContext(context);
-          return <WidgetList {...propsFromContext} {...props} />;
+          return <Component {...propsFromContext} {...props} />;
         }
       }
     </AppContext.Consumer>
