@@ -7,20 +7,22 @@ function getPropsFromContext(context) {
   };
 }
 
-const Component = WidgetList;
-
-function WidgetListWithAppContext(props) {
-  return (
-    <AppContext.Consumer>
-      {
-        function (context) {
-          const propsFromContext = getPropsFromContext(context);
-          return <Component {...propsFromContext} {...props} />;
+function WithAppContext(getPropsFromContext, Component) {
+  return function (props) {
+    return (
+      <AppContext.Consumer>
+        {
+          function (context) {
+            const propsFromContext = getPropsFromContext(context);
+            return <Component {...propsFromContext} {...props} />;
+          }
         }
-      }
-    </AppContext.Consumer>
-  );
+      </AppContext.Consumer>
+    );
+  };
 }
+
+const WidgetListWithAppContext = WithAppContext(getPropsFromContext, WidgetList);
 
 function WidgetList(props) {
   return (
