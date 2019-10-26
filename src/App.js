@@ -1,4 +1,5 @@
 import React from 'react';
+import WidgetList from './WidgetList';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {
-          this.state.widgets.map(
-            function (widget, i) {
-              return <div key={i}>{widget}</div>;
-            }
-          )
-        }
+        <WidgetList widgets={this.state.widgets} />
       </div>
     );
   }
