@@ -7,19 +7,6 @@ function getPropsFromContext(context) {
   };
 }
 
-function WidgetFormWithAppContext(props) {
-  return (
-    <AppContext.Consumer>
-      {
-        function (context) {
-          const propsFromContext = getPropsFromContext(context);
-          return <WidgetForm {...propsFromContext} {...props} />;
-        }
-      }
-    </AppContext.Consumer>
-  );
-}
-
 class WidgetForm extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +30,21 @@ class WidgetForm extends React.Component {
     this.props.onSubmit(widget);
     this.setState({ widget: '' });
   }
+}
+
+const Component = WidgetForm;
+
+function WidgetFormWithAppContext(props) {
+  return (
+    <AppContext.Consumer>
+      {
+        function (context) {
+          const propsFromContext = getPropsFromContext(context);
+          return <Component {...propsFromContext} {...props} />;
+        }
+      }
+    </AppContext.Consumer>
+  );
 }
 
 export default WidgetFormWithAppContext;
