@@ -3,7 +3,18 @@ import AppContext from './AppContext';
 import WidgetForm from './WidgetForm';
 import WidgetList from './WidgetList';
 
-function createStore() {
+function reducer(state, action) {
+  if (action.type === 'ADD_WIDGET') {
+    return {
+      ...state,
+      widgets: [ ...state.widgets, action.payload ],
+    };
+  }
+
+  return state;
+}
+
+function createStore(reducer) {
   let callback;
   let state = {
     widgets: [
@@ -13,13 +24,8 @@ function createStore() {
   };
 
   function dispatch(action) {
-    if (action.type === 'ADD_WIDGET') {
-      state = {
-        ...state,
-        widgets: [ ...state.widgets, action.payload ],
-      };
-      callback(state);
-    }
+    state = reducer(state, action);
+    callback(state);
   }
 
   return {
@@ -33,7 +39,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.store = createStore();
+    this.store = createStore(reducer);
 
     this.store.setCallback(state => this.setState({ ...state }));
 
