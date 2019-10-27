@@ -11,17 +11,17 @@ function reducer(state, action) {
     };
   }
 
-  return state;
-}
-
-function createStore(reducer) {
-  let callback;
-  let state = {
+  return {
     widgets: [
       'Alice',
       'Bob',
-    ],
+    ]
   };
+}
+
+function createStore(reducer, initialState) {
+  let callback;
+  let state = reducer(initialState, {});
 
   function dispatch(action) {
     state = reducer(state, action);
