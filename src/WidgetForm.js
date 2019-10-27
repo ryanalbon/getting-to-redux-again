@@ -28,6 +28,7 @@ class WidgetForm extends React.Component {
     e.preventDefault();
     const widget = this.state.widget;
     this.props.onSubmit(widget);
+    this.props.dispatch({ type: 'ADD_WIDGET', payload: widget });
     this.setState({ widget: '' });
   }
 }

@@ -8,8 +8,8 @@ function WithAppContext(getPropsFromContext, Component) {
       <AppContext.Consumer>
         {
           function (context) {
-            const propsFromContext = getPropsFromContext(context);
-            return <Component {...propsFromContext} {...props} />;
+            const propsFromContext = getPropsFromContext(context.getState());
+            return <Component dispatch={context.dispatch} {...propsFromContext} {...props} />;
           }
         }
       </AppContext.Consumer>

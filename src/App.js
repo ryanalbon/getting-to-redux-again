@@ -19,9 +19,14 @@ function createStore() {
     },
   };
 
+  function dispatch(action) {
+    console.log(action);
+  }
+
   return {
     getState: () => state,
     setCallback: cb => callback = cb,
+    dispatch,
   }
 }
 
@@ -29,16 +34,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const store = createStore();
+    this.store = createStore();
 
-    store.setCallback(state => this.setState({ ...state }));
+    this.store.setCallback(state => this.setState({ ...state }));
 
-    this.state = { ...store.getState() };
+    this.state = { ...this.store.getState() };
   }
 
   render() {
     return (
-      <AppContext.Provider value={this.state}>
+      <AppContext.Provider value={this.store}>
         <WidgetForm />
         <WidgetList />
       </AppContext.Provider>
