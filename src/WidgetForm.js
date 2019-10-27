@@ -3,7 +3,6 @@ import AppContext, { WithAppContext } from './AppContext';
 
 function getPropsFromContext(context) {
   return {
-    onSubmit: context.addWidget,
   };
 }
 
@@ -27,7 +26,6 @@ class WidgetForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const widget = this.state.widget;
-    this.props.onSubmit(widget);
     this.props.dispatch({ type: 'ADD_WIDGET', payload: widget });
     this.setState({ widget: '' });
   }

@@ -10,17 +10,16 @@ function createStore() {
       'Alice',
       'Bob',
     ],
-    addWidget: (widget) => {
-      state = {
-        ...state,
-        widgets: [ ...state.widgets, widget ],
-      };
-      callback(state);
-    },
   };
 
   function dispatch(action) {
-    console.log(action);
+    if (action.type === 'ADD_WIDGET') {
+      state = {
+        ...state,
+        widgets: [ ...state.widgets, action.payload ],
+      };
+      callback(state);
+    }
   }
 
   return {
