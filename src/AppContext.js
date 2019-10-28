@@ -1,6 +1,4 @@
 import React from 'react';
-import createStore from './create-store';
-import reducer from './reducer';
 
 const AppContext = React.createContext(undefined);
 
@@ -23,16 +21,14 @@ class AppContextProvider extends React.Component {
   constructor(props) {
     super(props);
 
-    this.store = createStore(reducer);
+    this.props.store.setCallback(state => this.setState({ ...state }));
 
-    this.store.setCallback(state => this.setState({ ...state }));
-
-    this.state = { ...this.store.getState() };
+    this.state = { ...this.props.store.getState() };
   }
 
   render() {
     return (
-      <AppContext.Provider value={{ ...this.state, dispatch: this.store.dispatch }}>
+      <AppContext.Provider value={{ ...this.state, dispatch: this.props.store.dispatch }}>
         {this.props.children}
       </AppContext.Provider>
     );
